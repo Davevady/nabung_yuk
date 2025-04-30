@@ -46,7 +46,7 @@ class UserController extends Controller
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
+                'title' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8|confirmed',
             ]);
@@ -63,7 +63,7 @@ class UserController extends Controller
 
             // Buat user baru
             $user = User::create([
-                'name' => $request->name,
+                'title' => $request->title,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role_id' => 1
@@ -110,7 +110,7 @@ class UserController extends Controller
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255',
+                'title' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:8',
                 'role_id' => 'required|exists:roles,id',
@@ -145,7 +145,7 @@ class UserController extends Controller
             try {
                 // Buat user baru
                 $user = new User();
-                $user->name = $request->name;
+                $user->title = $request->title;
                 $user->email = $request->email;
                 $user->password = Hash::make($request->password);
                 $user->role_id = $request->role_id;

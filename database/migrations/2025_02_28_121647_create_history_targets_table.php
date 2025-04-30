@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('history_targets', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->foreignId('target_id')->constrained('targets');
+            $table->integer('jumlah_tercapai');
+            $table->date('tanggal_tercapai');
+            $table->string('description')->nullable();
+            $table->string('media')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('history_targets');
     }
 };

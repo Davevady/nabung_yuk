@@ -21,7 +21,7 @@ class RoleController extends Controller
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
-                'name' => 'required|string|max:255|unique:roles'
+                'title' => 'required|string|max:255|unique:roles'
             ]);
 
             if ($validator->fails()) {
@@ -39,7 +39,7 @@ class RoleController extends Controller
             try {
                 // Buat role baru
                 $role = Role::create([
-                    'name' => $request->name
+                    'title' => $request->title
                 ]);
 
                 DB::commit();
@@ -55,7 +55,7 @@ class RoleController extends Controller
                         ]
                     ], 201);
                 }
-                return redirect()->route('roles.index')->with('success', 'Role berhasil ditambahkan');
+                return redirect()->route('role.index')->with('success', 'Role berhasil ditambahkan');
 
             } catch (\Exception $e) {
                 DB::rollback();

@@ -11,9 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('cash_ins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('jenis_in_id')->constrained('jenis_ins');
             $table->string('title');
+            $table->integer('jumlah');
+            $table->date('tanggal');
+            $table->time('jam');
+            $table->json('media')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
@@ -23,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('cash_ins');
     }
 };
